@@ -1,7 +1,12 @@
 .vs/
 Binaries/
 Build/
+Config/
+Content/
 DerivedDataCache/
 Intermediate/
 Saved/
 Script/
+!/Content/
+/Content/*
+!/Content/StableContent/

@@ -1,0 +1,51 @@
+{
+	"FileVersion": 3,
+	"EngineAssociation": "4.26",
+	"Category": "",
+	"Description": "",
+	"Modules": [
+		{
+			"Name": "TestingGround",
+			"Type": "Runtime",
+			"LoadingPhase": "Default",
+			"AdditionalDependencies": [
+				"Engine",
+				"UMG",
+				"CoreUObject",
+				"Blutility"
+			]
+		},
+		{
+			"Name": "EditorUtilities",
+			"Type": "Editor",
+			"LoadingPhase": "PreDefault",
+			"AdditionalDependencies": [
+				"MaterialEditor"
+			]
+			
+		}
+	],
+	"Plugins": [
+		{
+			"Name": "DebugTools",
+			"Enabled": true,
+			"MarketplaceURL": "com.epicgames.launcher://ue/marketplace/product/91ea3a3c5dbe4274b16ef36622c328d3"
+		},
+		{
+			"Name": "ActorPalette",
+			"Enabled": true
+		},
+		{
+			"Name": "HDRIBackdrop",
+			"Enabled": true
+		},
+		{
+			"Name": "PythonScriptPlugin",
+			"Enabled": true
+		},
+		{
+			"Name": "EditorScriptingUtilities",
+			"Enabled": true
+		}
+	]
+}

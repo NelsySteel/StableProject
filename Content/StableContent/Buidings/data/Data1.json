@@ -1,0 +1,29 @@
+[
+	{
+		"Name": "Administrative",
+		"type": "Administrative",
+		"base_price": 100,
+		"static_mesh": "StaticMesh'/Game/StableContent/Buidings/resources/Administrative/Building_SM.Building_SM'",
+		"normal_material": "Material'/Game/StableContent/Buidings/resources/Administrative/M_AdminBuilding.M_AdminBuilding'",
+		"available_material": "Material'/Game/StableContent/Buidings/resources/Administrative/M_AdminBuildingGood.M_AdminBuildingGood'",
+		"forbidden_material": "Material'/Game/StableContent/Buidings/resources/Administrative/M_AdminBuildingBad.M_AdminBuildingBad'"
+	},
+	{
+		"Name": "Stable",
+		"type": "Stable",
+		"base_price": 150,
+		"static_mesh": "StaticMesh'/Game/StableContent/Buidings/resources/Stable/Stable_SM.Stable_SM'",
+		"normal_material": "Material'/Game/StableContent/Buidings/resources/Stable/M_StableBuilding.M_StableBuilding'",
+		"available_material": "Material'/Game/StableContent/Buidings/resources/Stable/M_StableBuildingGood.M_StableBuildingGood'",
+		"forbidden_material": "Material'/Game/StableContent/Buidings/resources/Stable/M_StableBuildingBad.M_StableBuildingBad'"
+	},
+	{
+		"Name": "Field",
+		"type": "Field",
+		"base_price": 50,
+		"static_mesh": "StaticMesh'/Game/StableContent/Buidings/resources/Field/Field.Field'",
+		"normal_material": "Material'/Game/StableContent/Buidings/resources/Field/M_FieldBuilding.M_FieldBuilding'",
+		"available_material": "Material'/Game/StableContent/Buidings/resources/Field/M_FieldBuildingGood.M_FieldBuildingGood'",
+		"forbidden_material": "Material'/Game/StableContent/Buidings/resources/Field/M_FieldBuildingBad.M_FieldBuildingBad'"
+	}
+]
