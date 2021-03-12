@@ -7,7 +7,15 @@
 #include "Engine/DataTable.h"
 #include "HorsesManager.generated.h"
 
+class UPlayerProfile;
 class UHorseObject;
+
+const int MIN_HORSE_SPEED = 5;
+const int MAX_HORSE_SPEED = 15;
+const int MIN_HORSE_JUMP = 5;
+const int MAX_HORSE_JUMP = 15;
+const int MIN_HORSE_HANDLING = 5;
+const int MAX_HORSE_HANDLING = 15;
 
 UENUM(Blueprintable)
 enum HorseColor
@@ -69,6 +77,9 @@ public:
     UFUNCTION(BlueprintCallable)
     void SetRandomParameters(FString name, UDataTable* HorsesInfo);
 
+    UFUNCTION(BlueprintCallable)
+    int GetPrice(UPlayerProfile* profile) const;
+	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
         FString Name = "Adele";
 
@@ -101,7 +112,26 @@ class TESTINGGROUND_API UHorsesManager : public UObject
 {
 	GENERATED_BODY()
 public:
-	UHorsesManager() {}
+    UHorsesManager() {}
 
-    
+    void SetPlayerProfile(UPlayerProfile* profile);
+	
+    UFUNCTION(BlueprintCallable, Category = "Horses")
+        bool BuyHorse(UHorseObject* horse);
+
+    UFUNCTION(BlueprintCallable, Category = "Horses")
+        bool AddHorse(UHorseObject* horse);
+	
+    UFUNCTION(BlueprintCallable)
+        bool RemoveHorse(UHorseObject* horse);
+	
+    UFUNCTION(BlueprintCallable, Category = "Horses")
+        bool SellHorse(UHorseObject* horse);
+
+    UFUNCTION(BlueprintCallable, Category = "Horses")
+        TArray<UHorseObject*> GetHorses() { return Horses; }
+	
+private:
+    UPlayerProfile*         PlayerProfile;
+	TArray<UHorseObject*>	Horses;
 };

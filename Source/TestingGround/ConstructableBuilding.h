@@ -5,10 +5,8 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
 #include "Structures.h"
-#include "BuildingPropertiesComponent.h"
 #include "ConstructableBuilding.generated.h"
 
-class ABuildingSpot;
 DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnFinishMovingDelegate);
 
 
@@ -85,8 +83,8 @@ protected:
 	
 public:	
 	void Tick(float DeltaTime) override;
-	void SetPosition(const FVector& position, bool OnSpot);
-	void SetPosition(const FTransform& position, bool OnSpot, ABuildingSpot* slot);
+	void SetPosition(const FVector& position);
+	void SetPosition(const FTransform& position);
 
 private:
 	UPROPERTY(BlueprintGetter = GetState)

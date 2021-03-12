@@ -21,6 +21,8 @@ class TESTINGGROUND_API UConstructionManager : public UObject
 public:
 	UConstructionManager() {}
 
+	void SetPlayerProfile(UPlayerProfile* profile);
+	
 	UFUNCTION(BlueprintCallable)
 	void Tick(float DeltaTime);
 	
@@ -41,4 +43,5 @@ private:
 
 	UPROPERTY()
 	AConstructableBuilding*		BuiltObject = nullptr;
+	UPlayerProfile*				PlayerProfile;
 };

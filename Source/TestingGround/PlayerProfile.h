@@ -7,41 +7,34 @@
 #include "BudgetController.h"
 #include "HorsesManager.h"
 #include "ConstructionManager.h"
+#include "Time.h"
 #include "PlayerProfile.generated.h"
 
 /**
  * 
  */
-UCLASS(BlueprintType)
+UCLASS(BlueprintType, Blueprintable)
 class TESTINGGROUND_API UPlayerProfile : public UObject
 {
 	GENERATED_BODY()
 public:
 	UPlayerProfile();
 
-	UFUNCTION(BlueprintCallable)
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void Tick(float DeltaTime);
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Time")
+	ATime* timeController;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite ,Category = "Game Start")
+	int InitialBudget = 250;;
+
+	UPROPERTY(BlueprintReadOnly, Category = "Controllers")
+	UBudgetController*			BudgetController;
 	
-	UFUNCTION(BlueprintCallable)
-	bool BuyHorse(UHorseObject* horse);
-	
-	UFUNCTION(BlueprintCallable)
-	bool AddHorse(UHorseObject* horse);
+	UPROPERTY(BlueprintReadOnly, Category = "Controllers")
+	UConstructionManager*		ConstructionController;
 
-	UFUNCTION(BlueprintCallable)
-	bool SellHorse(UHorseObject* horse);
-
-	UFUNCTION(BlueprintCallable)
-		TArray<UHorseObject*> GetHorses() { return horses; };
-
-	UFUNCTION(BlueprintCallable)
-	bool RemoveHorse(UHorseObject* horse);
-
-	UPROPERTY(BlueprintReadOnly)
-	UBudgetController*		budgetCtrlr;
-	
-	UPROPERTY(BlueprintReadOnly)
-	UConstructionManager*	constructionMngr;
-private:
-	TArray<UHorseObject*>	horses;
+	UPROPERTY(BlueprintReadOnly, Category = "Controllers")
+	UHorsesManager*				HorsesController;
 };

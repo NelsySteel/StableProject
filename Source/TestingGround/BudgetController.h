@@ -3,6 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "ConstructionManager.h"
 #include "BudgetController.generated.h"
 
 /**
@@ -16,8 +17,12 @@ public:
 	UBudgetController() {}
 
 	UFUNCTION(BlueprintCallable)
-	int GetCurrentBudget() const { return m_budget; }
+	void Tick(float DeltaTime);
 	
+	UFUNCTION(BlueprintCallable)
+	int GetCurrentBudget() const { return m_budget; }
+
+	void SetPlayerProfile(UPlayerProfile* profile);
 	UFUNCTION(BlueprintCallable)
 	void AddCurrency(int money);
 
@@ -30,4 +35,5 @@ public:
 private:
 	UPROPERTY(BlueprintGetter=GetCurrentBudget)
 	int		m_budget = 0;
+	UPlayerProfile* PlayerProfile;
 };

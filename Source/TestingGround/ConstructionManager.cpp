@@ -3,30 +3,23 @@
 #include "ConstructableBuilding.h"
 #include "PlayerProfile.h"
 
+void UConstructionManager::SetPlayerProfile(UPlayerProfile* profile)
+{
+	PlayerProfile =profile;
+}
+
 void UConstructionManager::Tick(float DeltaTime)
 {
 	if (BuiltObject != nullptr)
 	{
-		TArray<TEnumAsByte<EObjectTypeQuery> > objTypes;
-		objTypes.Add(UEngineTypes::ConvertToObjectType(ECC_GameTraceChannel3));
+		// TArray<TEnumAsByte<EObjectTypeQuery> > objTypes;
+		// objTypes.Add(UEngineTypes::ConvertToObjectType(ECC_GameTraceChannel3));
 		FHitResult hitResult;
-		GetWorld()->GetFirstPlayerController()->GetHitResultUnderCursorForObjects(objTypes, true, hitResult);
+		GetWorld()->GetFirstPlayerController()->GetHitResultUnderCursorByChannel(UEngineTypes::ConvertToTraceType(ECC_GameTraceChannel1), true, hitResult);
 		if (hitResult.IsValidBlockingHit())
 		{
-			if (const auto hitSpot = dynamic_cast<ABuildingSpot*>(hitResult.GetActor()))
-			{
-				BuiltObject->SetPosition(hitSpot->GetBuildingPosition(), hitSpot->GetType() == BuiltObject->GetInfo().type && !hitSpot->IsBusy(), hitSpot);
-			}
+			BuiltObject->SetPosition(hitResult.Location);
 		}
-		else
-		{
-			GetWorld()->GetFirstPlayerController()->GetHitResultUnderCursorByChannel(UEngineTypes::ConvertToTraceType(ECC_GameTraceChannel1), true, hitResult);
-			if (hitResult.IsValidBlockingHit())
-			{
-				BuiltObject->SetPosition(hitResult.Location, false);
-			}
-		}
-		
 	}
 }
 

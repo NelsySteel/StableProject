@@ -3,6 +3,17 @@
 
 #include "BudgetController.h"
 #include <algorithm>
+#include "PlayerProfile.h"
+
+void UBudgetController::Tick(float DeltaTime)
+{
+	
+}
+
+void UBudgetController::SetPlayerProfile(UPlayerProfile* profile)
+{
+	PlayerProfile = profile;
+}
 
 void UBudgetController::AddCurrency(int money)
 {

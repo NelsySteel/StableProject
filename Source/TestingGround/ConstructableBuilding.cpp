@@ -55,12 +55,12 @@ void AConstructableBuilding::Tick(float DeltaTime)
 
 }
 
-void AConstructableBuilding::SetPosition(const FVector& position, bool OnSpot)
+void AConstructableBuilding::SetPosition(const FVector& position)
 {
 	SetActorLocation(position);
 }
 
-void AConstructableBuilding::SetPosition(const FTransform& position, bool OnSpot, ABuildingSpot* slot)
+void AConstructableBuilding::SetPosition(const FTransform& position)
 {
 	SetActorTransform(position);
 }
