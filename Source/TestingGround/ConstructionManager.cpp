@@ -1,7 +1,6 @@
 #include "ConstructionManager.h"
 #include "BuildingSpot.h"
 #include "ConstructableBuilding.h"
-#include "MenuItemWidget1.h"
 #include "PlayerProfile.h"
 
 void UConstructionManager::Tick(float DeltaTime)
@@ -46,7 +45,7 @@ TArray<FBuildingSettings> UConstructionManager::GetBuildingWidgets(UDataTable* b
 	for (const auto& rowName : buildingsInfo->GetRowNames())
 	{
 		const auto& info = buildingsInfo->FindRow<FBuildingSettings>(rowName, ContextString);
-		if (info->type == type)
+		if (info->type == type && info->ChildActorClass != nullptr)
 		{
 			widgets.Add(*info);
 		}
@@ -62,7 +61,7 @@ void UConstructionManager::MoveBuilding(AConstructableBuilding* building)
 	}
 	BuiltObject = building;
 	BuiltObject->Move();
-	BuiltObject->OnFinishMoving.AddDynamic(this, &UConstructionManager::OnStopMoving);
+	BuiltObject->OnFinishMoving.AddUniqueDynamic(this, &UConstructionManager::OnStopMoving);
 }
 
 
