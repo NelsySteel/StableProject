@@ -8,6 +8,24 @@
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnMonthChange);
 
+UENUM(Blueprintable)
+enum Months
+{
+	January					UMETA(DisplayName = "January"),
+	February                UMETA(DisplayName = "February"),
+	March                   UMETA(DisplayName = "March"),
+	April                   UMETA(DisplayName = "April"),
+	May						UMETA(DisplayName = "May"),
+	June					UMETA(DisplayName = "June"),
+	July					UMETA(DisplayName = "July"),
+	August                  UMETA(DisplayName = "August"),
+	September               UMETA(DisplayName = "September"),
+	October                 UMETA(DisplayName = "October"),
+	November                UMETA(DisplayName = "November"),
+	December                UMETA(DisplayName = "December"),
+	MonthCount				
+};
+
 /**
  * 
  */
@@ -24,8 +42,14 @@ public:
 
 
 	UFUNCTION(BlueprintCallable)
-		int GetCurrentMonth() const;
+	int GetCurrentMonthTotal() const;
 
+	UFUNCTION(BlueprintCallable)
+	int GetCurrentYear() const;
+
+	UFUNCTION(BlueprintCallable)
+	TEnumAsByte<Months>	GetCurrentMonth() const;
+	
 	UPROPERTY(BlueprintAssignable)
 	FOnMonthChange	OnMonthChange;
 protected:

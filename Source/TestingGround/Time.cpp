@@ -13,14 +13,26 @@ void ATime::TickActor(float DeltaTime, ELevelTick TickType, FActorTickFunction& 
 	m_currentTime += DeltaTime;
 	if ((int(m_currentTime) / int(m_secondsPerMonth)) > m_currentMonth)
 	{
+		m_currentMonth++;
 		OnMonthChange.Broadcast();
 	}
 }
 
-int ATime::GetCurrentMonth() const
+int ATime::GetCurrentMonthTotal() const
 {
 	return m_currentMonth;
 }
+
+int ATime::GetCurrentYear() const
+{
+	return int(m_currentMonth) / int(Months::MonthCount);
+}
+
+TEnumAsByte<Months> ATime::GetCurrentMonth() const
+{
+	return TEnumAsByte<Months>(m_currentMonth % int(Months::MonthCount));
+}
+
 
 void ATime::BeginPlay()
 {
