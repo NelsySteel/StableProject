@@ -23,6 +23,9 @@ public:
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void Tick(float DeltaTime);
 
+	UFUNCTION(BlueprintCallable)
+	TArray<AConstructableBuilding*> GetAllBuildings() const;
+	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Time")
 	ATime* timeController;
 

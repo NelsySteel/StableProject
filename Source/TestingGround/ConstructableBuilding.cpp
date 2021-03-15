@@ -75,14 +75,15 @@ bool AConstructableBuilding::StopMoving()
 	m_currentState = Idle;
 	if (PlacedCorrectly())
 	{
+		auto firstPlacement = !m_isAlreadyInWorld;
 		m_isAlreadyInWorld = true;
 		m_originalTransform = GetActorTransform();
-		return true;
+		return firstPlacement;
 	}
 	if (m_isAlreadyInWorld)
 	{
 		SetActorTransform(m_originalTransform);
-		return true;
+		return false;
 	}
 	Destroy();
 	return false;

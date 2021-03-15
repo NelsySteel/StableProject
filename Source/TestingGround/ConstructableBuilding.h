@@ -70,7 +70,10 @@ public:
 	TEnumAsByte<BuildingState> GetState() const { return m_currentState; }
 
 	UFUNCTION(BlueprintCallable)
-		TEnumAsByte<BuildingColor> GetMaterial() const;
+	TEnumAsByte<BuildingColor> GetMaterial() const;
+
+	UFUNCTION(BlueprintCallable)
+	bool IsReady() const { return m_isAlreadyInWorld; }
 	
 	UPROPERTY(BlueprintAssignable)
 	FOnFinishMovingDelegate	OnFinishMoving;

@@ -22,7 +22,7 @@ bool UHorsesManager::BuyHorse(UHorseObject* horse)
 	{
 		if (AddHorse(horse))
 		{
-			PlayerProfile->BudgetController->RemoveCurrency(price);
+			PlayerProfile->BudgetController->RegisterTransaction(-price);
 			return true;
 		}
 	}
@@ -47,7 +47,7 @@ bool UHorsesManager::SellHorse(UHorseObject* horse)
 		return false;
 	}
 	const auto& price = horse->GetPrice(PlayerProfile);
-	PlayerProfile->BudgetController->AddCurrency(price);
+	PlayerProfile->BudgetController->RegisterTransaction(price);
 	return RemoveHorse(horse);
 }
 

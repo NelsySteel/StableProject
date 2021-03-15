@@ -2,35 +2,45 @@
 
 
 #include "BuildingPropertiesComponent.h"
-#include <string>
+#include "CoreMinimal.h"
 
-// Sets default values for this component's properties
 UBuildingPropertiesComponent::UBuildingPropertiesComponent()
 {
 	PrimaryComponentTick.bCanEverTick = false;
 }
 
 
-// Called when the game starts
 void UBuildingPropertiesComponent::BeginPlay()
 {
 	Super::BeginPlay();
-
-	// ...
 	
 }
 
 
-// Called every frame
 void UBuildingPropertiesComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 }
 
+float UBuildingPropertiesComponent::GetBuildingExpenses_Implementation() const
+{
+	return BuildingExpenses;
+}
+
+float UBuildingPropertiesComponent::GetBuildingIncome_Implementation() const
+{
+	return BuildingIncome;
+}
+
+void UBuildingPropertiesComponent::Upgrade_Implementation()
+{
+	
+}
+
 TMap<FString, FString> UBuildingPropertiesComponent::GetVisualInfo() const
 {
 	TMap<FString, FString> info = TMap<FString, FString>();
-	info.Add("Price", FString::FromInt(GetBuildingPrice()));
+	// info.Add("Price", FString::FromInt(GetBuildingPrice()));
 	return info;
 }
 

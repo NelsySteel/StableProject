@@ -4,6 +4,17 @@
 #include "BudgetController.h"
 #include <algorithm>
 #include "PlayerProfile.h"
+#include "Runtime/Engine/Classes/Kismet/GameplayStatics.h"
+
+UBudgetController::UBudgetController()
+{
+	TArray<AActor*> FoundActors;
+	UGameplayStatics::GetAllActorsOfClass(GetWorld(), ATime::StaticClass(), FoundActors);
+	if (FoundActors.Num() >0)
+	{
+		Cast<ATime>(FoundActors[0])->OnMonthChange.AddUniqueDynamic(this, &UBudgetController::OnMonthChange);
+	}
+}
 
 void UBudgetController::Tick(float DeltaTime)
 {
@@ -15,12 +26,56 @@ void UBudgetController::SetPlayerProfile(UPlayerProfile* profile)
 	PlayerProfile = profile;
 }
 
-void UBudgetController::AddCurrency(int money)
+void UBudgetController::RegisterTransaction(int money)
 {
 	m_budget += money;
 }
 
-void UBudgetController::RemoveCurrency(int money)
+float UBudgetController::GetTotalExpenses() const
 {
-	m_budget = std::max(0, m_budget - money);
+	float result = 0.f;
+	const auto& Buildings = PlayerProfile->GetAllBuildings();
+	for (const auto* Building : Buildings)
+	{
+		if (const auto& component = Building->FindComponentByClass(UBuildingPropertiesComponent::StaticClass()))
+		{
+			result += Cast<UBuildingPropertiesComponent>(component)->GetBuildingExpenses();
+		}
+	}
+	return result;
+}
+
+float UBudgetController::GetTotalIncome() const
+{
+	float result = 0.f;
+	const auto& Buildings = PlayerProfile->GetAllBuildings();
+	for (const auto* Building : Buildings)
+	{
+		if (const auto& component = Building->FindComponentByClass(UBuildingPropertiesComponent::StaticClass()))
+		{
+			result += Cast<UBuildingPropertiesComponent>(component)->GetBuildingIncome();
+		}
+	}
+	return result;
+}
+
+float UBudgetController::GetTotalBalanceChange() const
+{
+	float result = 0.f;
+	const auto& Buildings = PlayerProfile->GetAllBuildings();
+	for (const auto* Building : Buildings)
+	{
+		if (const auto& component = Building->FindComponentByClass(UBuildingPropertiesComponent::StaticClass()))
+		{
+			const auto& BuildingSettingsComponent = Cast<UBuildingPropertiesComponent>(component);
+			result += BuildingSettingsComponent->GetBuildingIncome();
+			result -= BuildingSettingsComponent->GetBuildingExpenses();
+		}
+	}
+	return result;
+}
+
+void UBudgetController::OnMonthChange()
+{
+	RegisterTransaction(GetTotalBalanceChange());
 }

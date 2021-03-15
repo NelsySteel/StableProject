@@ -14,24 +14,33 @@ class TESTINGGROUND_API UBudgetController : public UObject
 {
 	GENERATED_BODY()
 public:
-	UBudgetController() {}
+	UBudgetController();
 
 	UFUNCTION(BlueprintCallable)
 	void Tick(float DeltaTime);
 	
-	UFUNCTION(BlueprintCallable)
+	UFUNCTION(BlueprintCallable, Category="Budget Info")
 	int GetCurrentBudget() const { return m_budget; }
 
 	void SetPlayerProfile(UPlayerProfile* profile);
 	UFUNCTION(BlueprintCallable)
-	void AddCurrency(int money);
-
-	UFUNCTION(BlueprintCallable)
-	void RemoveCurrency(int money);
+	void RegisterTransaction(int money);
 
 	UFUNCTION(BlueprintCallable)
 	bool CanBuy(int money) { return GetCurrentBudget() >= money; }
 
+	UFUNCTION(BlueprintCallable, Category = "Budget Info")
+	float GetTotalExpenses() const;
+
+	UFUNCTION(BlueprintCallable, Category = "Budget Info")
+	float GetTotalIncome() const;
+
+	UFUNCTION(BlueprintCallable, Category = "Budget Info")
+	float GetTotalBalanceChange() const;
+
+	UFUNCTION(BlueprintCallable, Category = "Budget Info")
+	void OnMonthChange();
+	
 private:
 	UPROPERTY(BlueprintGetter=GetCurrentBudget)
 	int		m_budget = 0;
