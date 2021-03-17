@@ -2,6 +2,7 @@
 
 
 #include "Time.h"
+#include "math.h"
 
 ATime::ATime()
 {
@@ -10,17 +11,24 @@ ATime::ATime()
 
 void ATime::TickActor(float DeltaTime, ELevelTick TickType, FActorTickFunction& ThisTickFunction)
 {
-	m_currentTime += DeltaTime;
-	if ((int(m_currentTime) / int(m_secondsPerMonth)) > m_currentMonth)
+	m_currentTime += DeltaTime * GetModifier();
+
+	if (GetCurrentMonthProgress() >= 1)
 	{
 		m_currentMonth++;
 		OnMonthChange.Broadcast();
+		m_currentTime = 0;
 	}
 }
 
 int ATime::GetCurrentMonthTotal() const
 {
 	return m_currentMonth;
+}
+
+float ATime::GetCurrentMonthProgress() const
+{
+	return m_currentTime / m_secondsPerMonth;
 }
 
 int ATime::GetCurrentYear() const

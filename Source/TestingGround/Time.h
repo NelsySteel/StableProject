@@ -40,15 +40,23 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Time Settings")
 	float		m_secondsPerMonth = 300;
 
-
 	UFUNCTION(BlueprintCallable)
 	int GetCurrentMonthTotal() const;
+
+	UFUNCTION(BlueprintCallable)
+	float GetCurrentMonthProgress() const;
 
 	UFUNCTION(BlueprintCallable)
 	int GetCurrentYear() const;
 
 	UFUNCTION(BlueprintCallable)
 	TEnumAsByte<Months>	GetCurrentMonth() const;
+
+	UFUNCTION(BlueprintCallable)
+		float	GetModifier() const { return m_TimeModifier; }
+	
+	UFUNCTION(BlueprintCallable)
+		void	SetModifier(float new_modifier) { m_TimeModifier = new_modifier; }
 	
 	UPROPERTY(BlueprintAssignable)
 	FOnMonthChange	OnMonthChange;
@@ -57,6 +65,7 @@ protected:
 
 private:
 	float		m_currentTime = 0;
+	float		m_TimeModifier = 1;
 
 	
 	int			m_currentMonth = 0;
