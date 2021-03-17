@@ -4,18 +4,28 @@
 #include "PlayerProfile.h"
 #include "Runtime/Engine/Classes/Kismet/GameplayStatics.h"
 
-UPlayerProfile::UPlayerProfile()
+APlayerProfile::APlayerProfile()
 {
-	BudgetController = CreateDefaultSubobject<UBudgetController>("Budget Manager");
+	if (!BudgetController)
+	{
+		BudgetController = CreateDefaultSubobject<UBudgetController>("Budget Manager");
+	}
 	BudgetController->SetPlayerProfile(this);
-	BudgetController->RegisterTransaction(InitialBudget);
-	ConstructionController = CreateDefaultSubobject<UConstructionManager>("Construction Manager");
+
+	if (!ConstructionController)
+	{
+		ConstructionController = CreateDefaultSubobject<UConstructionManager>("Construction Manager");
+	}
 	ConstructionController->SetPlayerProfile(this);
-	HorsesController = CreateDefaultSubobject<UHorsesManager>("Horses Manager");
+
+	if (!HorsesController)
+	{
+		HorsesController = CreateDefaultSubobject<UHorsesManager>("Horses Manager");
+	}
 	HorsesController->SetPlayerProfile(this);
 }
 
-TArray<AConstructableBuilding*> UPlayerProfile::GetAllBuildings() const
+TArray<AConstructableBuilding*> APlayerProfile::GetAllBuildings() const
 {
 	TArray<AConstructableBuilding*> result;
 	TArray<AActor*> FoundActors;
@@ -32,7 +42,7 @@ TArray<AConstructableBuilding*> UPlayerProfile::GetAllBuildings() const
 	return result;
 }
 
-void UPlayerProfile::Tick_Implementation(float DeltaTime)
+void APlayerProfile::Tick_Implementation(float DeltaTime)
 {
 	ConstructionController->Tick(DeltaTime);
 	BudgetController->Tick(DeltaTime);

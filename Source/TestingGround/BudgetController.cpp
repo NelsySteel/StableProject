@@ -16,19 +16,14 @@ UBudgetController::UBudgetController()
 	}
 }
 
-void UBudgetController::Tick(float DeltaTime)
-{
-	
-}
-
-void UBudgetController::SetPlayerProfile(UPlayerProfile* profile)
+void UBudgetController::SetPlayerProfile(APlayerProfile* profile)
 {
 	PlayerProfile = profile;
 }
 
 void UBudgetController::RegisterTransaction(int money)
 {
-	m_budget += money;
+	CurrentBudget += money;
 }
 
 float UBudgetController::GetTotalExpenses() const

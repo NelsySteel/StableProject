@@ -7,7 +7,7 @@
 #include "Engine/DataTable.h"
 #include "HorsesManager.generated.h"
 
-class UPlayerProfile;
+class APlayerProfile;
 class UHorseObject;
 
 const int MIN_HORSE_SPEED = 5;
@@ -78,7 +78,7 @@ public:
     void SetRandomParameters(FString name, UDataTable* HorsesInfo);
 
     UFUNCTION(BlueprintCallable)
-    int GetPrice(UPlayerProfile* profile) const;
+    int GetPrice(APlayerProfile* profile) const;
 	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
         FString Name = "Adele";
@@ -107,14 +107,14 @@ public:
 /**
  * 
  */
-UCLASS(BlueprintType)
+UCLASS(BlueprintType, EditInlineNew)
 class TESTINGGROUND_API UHorsesManager : public UObject
 {
 	GENERATED_BODY()
 public:
     UHorsesManager() {}
 
-    void SetPlayerProfile(UPlayerProfile* profile);
+    void SetPlayerProfile(APlayerProfile* profile);
 	
     UFUNCTION(BlueprintCallable, Category = "Horses")
         bool BuyHorse(UHorseObject* horse);
@@ -132,6 +132,6 @@ public:
         TArray<UHorseObject*> GetHorses() { return Horses; }
 	
 private:
-    UPlayerProfile*         PlayerProfile;
+    APlayerProfile*         PlayerProfile;
 	TArray<UHorseObject*>	Horses;
 };

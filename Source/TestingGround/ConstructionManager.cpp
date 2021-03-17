@@ -3,7 +3,7 @@
 #include "ConstructableBuilding.h"
 #include "PlayerProfile.h"
 
-void UConstructionManager::SetPlayerProfile(UPlayerProfile* profile)
+void UConstructionManager::SetPlayerProfile(APlayerProfile* profile)
 {
 	PlayerProfile =profile;
 }
@@ -30,7 +30,7 @@ AConstructableBuilding* UConstructionManager::BuildObject(AConstructableBuilding
 	return BuiltObject;
 }
 
-TArray<FBuildingSettings> UConstructionManager::GetBuildingWidgets(UDataTable* buildingsInfo, UPlayerProfile* profile, TEnumAsByte<BuildingType> type)
+TArray<FBuildingSettings> UConstructionManager::GetBuildingWidgets(UDataTable* buildingsInfo, APlayerProfile* profile, TEnumAsByte<BuildingType> type)
 {
 	TArray<FBuildingSettings> widgets;
 	TArray<FBuildingSettings*> rows;

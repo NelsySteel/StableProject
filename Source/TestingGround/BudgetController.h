@@ -9,7 +9,7 @@
 /**
  * 
  */
-UCLASS(BlueprintType)
+UCLASS(BlueprintType, EditInlineNew)
 class TESTINGGROUND_API UBudgetController : public UObject
 {
 	GENERATED_BODY()
@@ -17,17 +17,17 @@ public:
 	UBudgetController();
 
 	UFUNCTION(BlueprintCallable)
-	void Tick(float DeltaTime);
+	void Tick(float DeltaTime) {}
 	
 	UFUNCTION(BlueprintCallable, Category="Budget Info")
-	int GetCurrentBudget() const { return m_budget; }
+	int GetCurrentBudget() const { return CurrentBudget; }
 
-	void SetPlayerProfile(UPlayerProfile* profile);
+	void SetPlayerProfile(APlayerProfile* profile);
 	UFUNCTION(BlueprintCallable)
 	void RegisterTransaction(int money);
 
 	UFUNCTION(BlueprintCallable)
-	bool CanBuy(int money) { return GetCurrentBudget() >= money; }
+	bool CanBuy(int money) const { return GetCurrentBudget() >= money; }
 
 	UFUNCTION(BlueprintCallable, Category = "Budget Info")
 	float GetTotalExpenses() const;
@@ -40,9 +40,9 @@ public:
 
 	UFUNCTION(BlueprintCallable, Category = "Budget Info")
 	void OnMonthChange();
-	
+
+	UPROPERTY(EditDefaultsOnly, Category = "Game Start")
+	int				CurrentBudget = 250;
 private:
-	UPROPERTY(BlueprintGetter=GetCurrentBudget)
-	int		m_budget = 0;
-	UPlayerProfile* PlayerProfile;
+	APlayerProfile* PlayerProfile;
 };

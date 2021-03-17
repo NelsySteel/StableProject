@@ -5,7 +5,7 @@
 #include "PlayerProfile.h"
 
 
-void UHorsesManager::SetPlayerProfile(UPlayerProfile* profile)
+void UHorsesManager::SetPlayerProfile(APlayerProfile* profile)
 {
 	PlayerProfile = profile ;
 }
@@ -92,7 +92,7 @@ void UHorseObject::SetRandomParameters(FString name, UDataTable* HorsesInfo)
 	SetInfo(name, *type, TEnumAsByte<HorseColor>(color_index), speed, jump, handling);
 }
 
-int UHorseObject::GetPrice(UPlayerProfile* profile) const
+int UHorseObject::GetPrice(APlayerProfile* profile) const
 {
 	return Type.BasePrice;
 }

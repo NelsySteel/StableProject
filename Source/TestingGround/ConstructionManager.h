@@ -8,12 +8,12 @@
 #include "ConstructableBuilding.h"
 #include "ConstructionManager.generated.h"
 
-class UPlayerProfile;
+class APlayerProfile;
 using namespace std;
 
 class UMenuItemWidget1;
 
-UCLASS(Blueprintable, BlueprintType)
+UCLASS(Blueprintable, BlueprintType, EditInlineNew)
 class TESTINGGROUND_API UConstructionManager : public UObject
 {
 	GENERATED_BODY()
@@ -21,7 +21,7 @@ class TESTINGGROUND_API UConstructionManager : public UObject
 public:
 	UConstructionManager() {}
 
-	void SetPlayerProfile(UPlayerProfile* profile);
+	void SetPlayerProfile(APlayerProfile* profile);
 	
 	UFUNCTION(BlueprintCallable)
 	void Tick(float DeltaTime);
@@ -30,7 +30,7 @@ public:
 	AConstructableBuilding* BuildObject(AConstructableBuilding* object, FBuildingSettings info);
 
 	UFUNCTION(BlueprintCallable)
-	TArray<FBuildingSettings> GetBuildingWidgets(UDataTable* buildingsInfo, UPlayerProfile* profile, TEnumAsByte<BuildingType> type);
+	TArray<FBuildingSettings> GetBuildingWidgets(UDataTable* buildingsInfo, APlayerProfile* profile, TEnumAsByte<BuildingType> type);
 
 	UFUNCTION(BlueprintCallable)
 	void MoveBuilding(AConstructableBuilding* building);
@@ -43,5 +43,5 @@ private:
 
 	UPROPERTY()
 	AConstructableBuilding*		BuiltObject = nullptr;
-	UPlayerProfile*				PlayerProfile;
+	APlayerProfile*				PlayerProfile;
 };

@@ -14,30 +14,27 @@
  * 
  */
 UCLASS(BlueprintType, Blueprintable)
-class TESTINGGROUND_API UPlayerProfile : public UObject
+class TESTINGGROUND_API APlayerProfile : public AActor
 {
 	GENERATED_BODY()
 public:
-	UPlayerProfile();
+	APlayerProfile();
 
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
-	void Tick(float DeltaTime);
+	void Tick(float DeltaTime) override;
 
 	UFUNCTION(BlueprintCallable)
 	TArray<AConstructableBuilding*> GetAllBuildings() const;
 	
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Time")
-	ATime* timeController;
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite ,Category = "Game Start")
-	int InitialBudget = 250;;
-
-	UPROPERTY(BlueprintReadOnly, Category = "Controllers")
-	UBudgetController*			BudgetController;
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Controllers")
+	UBudgetController*			BudgetController = nullptr;
 	
-	UPROPERTY(BlueprintReadOnly, Category = "Controllers")
-	UConstructionManager*		ConstructionController;
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Controllers")
+	UConstructionManager*		ConstructionController = nullptr;
 
-	UPROPERTY(BlueprintReadOnly, Category = "Controllers")
-	UHorsesManager*				HorsesController;
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Controllers")
+	UHorsesManager*				HorsesController = nullptr;
+
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Controllers")
+	ATime*						TimeController = nullptr;
 };
